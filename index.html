@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- displays site properly based on user's device -->
+
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="./images/favicon-32x32.png"
+    />
+
+    <title>Frontend Mentor | Fylo data storage component</title>
+
+    <!-- Feel free to remove these styles or customise in your own stylesheet 👍 -->
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@100&family=Raleway&display=swap");
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      body {
+        height: 100vh;
+        width: 100vw;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: hsl(229, 57%, 11%);
+        position: relative;
+        font-family: "Raleway", sans-serif;
+      }
+
+      .parent {
+        height: 35%;
+        width: 75%;
+        /* border: 1px solid black; */
+        display: flex;
+        align-items: flex-end;
+        border-radius: 10px;
+        /* overflow: hidden; */
+        position: relative;
+        z-index: 5;
+      }
+
+      .banner {
+        display: flex;
+        align-items: flex-start;
+        padding-left: 2em;
+        flex-direction: column;
+        justify-content: space-evenly;
+        height: 100%;
+        width: 40%;
+        background: hsl(228, 56%, 26%);
+        border-top-right-radius: 30%;
+        min-width: 250px;
+      }
+
+      .overlay {
+        position: absolute;
+        top: 0;
+        width: 100%;
+        height: 50%;
+        z-index: -2;
+        /* background: red; */
+      }
+
+      .card {
+        width: 60%;
+        height: 65%;
+        /* border: 2px solid white; */
+        margin-left: 20px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: flex-start;
+        padding-left: 2em;
+        background: hsl(228, 56%, 26%);
+        color: hsl(243, 100%, 93%);
+        min-width: 400px;
+      }
+
+      .flex {
+        display: flex;
+      }
+
+      .between {
+        justify-content: space-between;
+        align-items: center;
+        /* background: orange; */
+        width: 95%;
+      }
+
+      .icon-div {
+        background: hsl(229, 57%, 11%);
+        margin-left: 10px;
+        height: 50px;
+        width: 50px;
+        border-radius: 10%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .p {
+        font-size: 12px;
+        margin-bottom: 10px;
+      }
+
+      .bold {
+        font-size: 16px;
+      }
+
+      .progress-div {
+        width: 95%;
+        margin-bottom: 10px;
+        position: relative;
+      }
+
+      .progress-bar {
+        width: 100%;
+        height: 20px;
+        border: 1px solid white;
+        border-radius: 100px;
+        overflow: hidden;
+      }
+
+      .progress {
+        height: 100%;
+        width: 76%;
+        background: linear-gradient(
+          to right,
+          hsl(6, 100%, 80%),
+          hsl(335, 100%, 65%)
+        );
+        position: relative;
+        border-radius: 100px;
+      }
+
+      .ball {
+        background: white;
+        border-radius: 50%;
+        height: 15px;
+        width: 15px;
+        position: absolute;
+        right: 0;
+        cursor: pointer;
+      }
+
+      .background {
+        height: 50%;
+        width: 100%;
+        position: absolute;
+        bottom: 0;
+      }
+
+      .bg-image {
+        object-fit: contain;
+      }
+      .attribution {
+        font-size: 11px;
+        text-align: center;
+        position: absolute;
+        bottom: 0%;
+        margin: 0 auto;
+      }
+      .attribution a {
+        color: hsl(228, 45%, 44%);
+      }
+
+      .blurb-div {
+        position: absolute;
+        right: 0;
+        top: -85px;
+        height: 50px;
+        color: black;
+      }
+
+      .blurb {
+        width: 100%;
+        height: 100%;
+        border-radius: 10px;
+        background: white;
+      }
+
+      .blurb-point {
+        /* width: 10px;
+        height: 25px;
+        background: white;
+        position: absolute;
+        right: 0;
+        bottom: -25px; */
+
+        width: 0;
+        height: 0;
+        border-top: 20px solid transparent;
+        border-bottom: 20px solid transparent;
+        border-left: 20px solid white;
+        transform: rotate(180deg);
+        position: absolute;
+        right: 0;
+        bottom: -20px;
+      }
+
+      @media screen and (max-width: 550px) {
+        .parent {
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          height: 85%;
+        }
+
+        .banner {
+          width: 100%;
+          height: 100%;
+          margin-bottom: 10px;
+        }
+
+        .card {
+          width: 100%;
+          height: 75%;
+          margin-left: 0;
+          min-width: 0px;
+        }
+
+        .blurb-div {
+          top: 85px;
+          margin: 0 auto;
+          width: 135px;
+          left: -50px;
+          bottom: 0;
+          z-index: 10;
+        }
+
+        .blurb {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+
+        .blurb-point {
+          opacity: 0;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="overlay"></div>
+
+    <div class="parent">
+      <div class="banner">
+        <span><img src="./images/logo.svg" /></span>
+        <div class="flex">
+          <div class="icon-div">
+            <img class="icon" src="./images/icon-document.svg" alt="img" />
+          </div>
+          <div class="icon-div">
+            <img class="icon" src="./images/icon-folder.svg" alt="img" />
+          </div>
+          <div class="icon-div">
+            <img class="icon" src="./images/icon-upload.svg" alt="img" />
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        <p class="p">
+          You’ve used <span class="bold used">815 GB </span> of your storage
+        </p>
+        <div class="progress-div">
+          <div class="blurb-div">
+            <div class="blurb">
+              <h1 class="free">185 GB</h1>
+            </div>
+            <div class="blurb-point"></div>
+          </div>
+          <div class="progress-bar">
+            <div class="progress">
+              <div draggable="true" class="ball"></div>
+            </div>
+          </div>
+        </div>
+        <!-- <div class="blurb"><h1>185 GB Left</h1></div> -->
+        <div class="flex between">
+          <h5 class="bold">0 GB</h5>
+          <h5 class="bold">1000 GB</h5>
+        </div>
+      </div>
+    </div>
+    <div class="background">
+      <img class="bg-image" src="./images/bg-desktop.png" alt="img" />
+    </div>
+
+    <div class="attribution">
+      Challenge by
+      <a href="https://www.frontendmentor.io?ref=challenge" target="_blank"
+        >Frontend Mentor</a
+      >. Coded by <a href="#">Your Name Here</a>.
+    </div>
+
+    <script>
+      document.querySelector(".ball").ondrag = () => {
+        // console.log("drag!");
+        // let width = parseInt(
+        //   window
+        //     .getComputedStyle(document.querySelector(".progress"))
+        //     .getPropertyValue("width")
+        // );
+        // console.log(width);
+        // width = width - 1;
+        // console.log(width);
+        // document.querySelector(".progress").style.width = width + "px";
+      };
+
+      let startPoint = 0;
+      // let stopPoint = 0;
+      document.querySelector(".ball").ondragstart = (e) => {
+        console.log("dragstart!");
+        console.log("ClientXStart", e.clientX);
+        startPoint = e.clientX;
+      };
+
+      document.querySelector(".ball").ondragend = (e) => {
+        console.log("dragend!");
+        console.log("ClientXEnd", e.clientX);
+        let endDifference = startPoint - e.clientX;
+
+        let width = parseInt(
+          window
+            .getComputedStyle(document.querySelector(".progress"))
+            .getPropertyValue("width")
+        );
+
+        let progress_bar_width = parseInt(
+          window
+            .getComputedStyle(document.querySelector(".progress-bar"))
+            .getPropertyValue("width")
+        );
+        // console.log(width);
+        width = width - endDifference;
+        let progressPercent = width / progress_bar_width;
+        console.log("Percent", progressPercent + "%");
+        let usedGigz = progressPercent * 1000;
+        console.log(usedGigz);
+        document.querySelector(".used").innerHTML = usedGigz.toFixed(0) + " GB";
+        document.querySelector(".free").innerHTML =
+          1000 - usedGigz.toFixed(0) + " GB";
+        // console.log(width);
+        document.querySelector(".progress").style.width = width + "px";
+      };
+    </script>
+  </body>
+</html>
